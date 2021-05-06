@@ -1,0 +1,26 @@
+{
+  "error_content_type": "application/json",
+  "roles": ["customer"],
+  "redis": {
+    "host": "redis",
+    "database": 0,
+    "password": "hasty",
+    "prefix": "superhardpassword"
+  },
+  "amqp": {
+    "user": "hasty",
+    "password": "superhardpassword",
+    "host": "rabbitmq",
+    "port": 5682,
+    "auth_exchange": "auth",
+    "prefix": "cm"
+  },
+  "routes": [
+    {
+      "source": "/login/",
+      "destination": "auth-service:8000/login/",
+      "pattern": "",
+      "methods": ["OPTIONS", "POST"]
+    }
+  ]
+}

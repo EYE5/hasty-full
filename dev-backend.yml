@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+  api-gateway:
+    build:
+      context: ./api-gateway
+      dockerfile: Dockerfile
+    environment:
+      - CONFIG=/config.json
+      - LOG_LEVEL=debug
+      - INSTRUMENTING=true
+    volumes:
+      - "./config/config-user.json:/config.json"
+    restart: always
+    ports:
+      - "3000:8080"

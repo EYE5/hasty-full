@@ -1,19 +1,62 @@
-version: "1"
+version: "3"
 
 services:
   redis:
     image: redis:latest
-    command: redis-server --requirepass Dan...230298
+    command: redis-server --requirepass superhardpassword
     restart: always
     ports:
-      - "6379:6379"
+      - "6380:6379"
 
   redis-commander:
     image: rediscommander/redis-commander:latest
-    depends-on:
+    depends_on:
       - redis
+    restart: always
+    ports:
+      - "8093:8081"
     environment:
       - REDIS_HOST=redis
-      - REDIS_PASSWORD=230298
+      - REDIS_PASSWORD=superhardpassword
       - HTTP_USER=hasty
-      - HTTP_PASSWORD=Dan...230298
+      - HTTP_PASSWORD=superhardpassword
+
+  rabbitmq:
+    image: rabbitmq:latest
+    environment:
+      - RABBITMQ_DEFAULT_USER=hasty
+      - RABBITMQ_DEFAULT_PASS=superhardpassword
+    volumes:
+      - rabbitmqdata:/var/lib/rabbitmq/hasty
+    restart: always
+    ports:
+      - "5682:5672"
+      - "15682:15672"
+
+  mongo:
+    image: mongo:latest
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=superhardpassword
+    volumes:
+      - mongodata:/data/db
+    restart: always
+    ports:
+      - "27087:27017"
+
+  mongo-express:
+    image: mongo-express
+    depends_on:
+      - mongo
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=root
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=superhardpassword
+      - ME_CONFIG_BASICAUTH_USERNAME=hasty
+      - ME_CONFIG_BASICAUTH_PASSWORD=hardpassword
+    restart: always
+    ports:
+      - "8091:8081"
+
+volumes:
+  rabbitmqdata:
+  mongodata:

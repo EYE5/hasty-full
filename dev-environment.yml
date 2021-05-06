@@ -1,0 +1,19 @@
+version: "1"
+
+services:
+  redis:
+    image: redis:latest
+    command: redis-server --requirepass Dan...230298
+    restart: always
+    ports:
+      - "6379:6379"
+
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    depends-on:
+      - redis
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PASSWORD=230298
+      - HTTP_USER=hasty
+      - HTTP_PASSWORD=Dan...230298

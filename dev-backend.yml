@@ -1,7 +1,7 @@
 version: "3"
 
 services:
-  api-gateway:
+  hasty-gateway:
     build:
       context: ./hasty-gateway
       dockerfile: Dockerfile

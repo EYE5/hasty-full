@@ -3,7 +3,7 @@ version: "3"
 services:
   api-gateway:
     build:
-      context: ./api-gateway
+      context: ./hasty-gateway
       dockerfile: Dockerfile
     environment:
       - CONFIG=/config.json

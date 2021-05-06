@@ -1,0 +1,4 @@
+[submodule "hasty-gateway"]
+	path = hasty-gateway
+	url = https://github.com/EYE5/hasty-gateway
+	branch = master

@@ -29,5 +29,5 @@ jobs:
       - name: Run a multi-line script
         run: |
           echo Running docker-compose,
-          docker-compose dev-env.yml,
-          docker-compose dev-backend.yml
+          docker-compose -f dev-environment.yml up --build,
+          docker-compose -f dev-backend.yml up --build

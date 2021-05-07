@@ -2,3 +2,6 @@
 	path = hasty-gateway
 	url = https://github.com/EYE5/hasty-gateway
 	branch = master
+[submodule "hasty-auth"]
+	path = hasty-auth
+	url = https://github.com/EYE5/hasty-auth

@@ -11,6 +11,15 @@ services:
       - INSTRUMENTING=true
     volumes:
       - "./config/config-user.json:/config.json"
-    restart: always
     ports:
-      - "3000:8080"
+      - "1234:8080"
+
+  hasty-auth:
+    build:
+      context: ./hasty-auth
+      dockerfile: Dockerfile
+    environment:
+      - LOG_LEVEL=debug
+      - INSTRUMENTING=true
+    ports:
+      - "1235:8000"

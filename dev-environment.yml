@@ -7,6 +7,8 @@ services:
     restart: always
     ports:
       - "6380:6379"
+    networks:
+      - hasty
 
   redis-commander:
     image: rediscommander/redis-commander:latest
@@ -20,6 +22,8 @@ services:
       - REDIS_PASSWORD=superhardpassword
       - HTTP_USER=hasty
       - HTTP_PASSWORD=superhardpassword
+    networks:
+      - hasty
 
   rabbitmq:
     image: rabbitmq:latest
@@ -32,6 +36,8 @@ services:
     ports:
       - "5682:5672"
       - "15682:15672"
+    networks:
+      - hasty
 
   mongo:
     image: mongo:latest
@@ -43,6 +49,8 @@ services:
     restart: always
     ports:
       - "27087:27017"
+    networks:
+      - hasty
 
   mongo-express:
     image: mongo-express
@@ -56,6 +64,12 @@ services:
     restart: always
     ports:
       - "8091:8081"
+    networks:
+      - hasty
+
+networks:
+  hasty:
+    external: true
 
 volumes:
   rabbitmqdata:

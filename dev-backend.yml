@@ -13,6 +13,9 @@ services:
       - "./config/config-user.json:/config.json"
     ports:
       - "1234:8080"
+    restart: always
+    networks:
+      - hasty
 
   hasty-auth:
     build:
@@ -23,3 +26,10 @@ services:
       - INSTRUMENTING=true
     ports:
       - "1235:8000"
+    restart: always
+    networks:
+      - hasty
+
+networks:
+  hasty:
+    external: true
